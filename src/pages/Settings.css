@@ -7,15 +7,17 @@
 .settings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
 .settings-card {
-  background: #fff;
+  background: var(--surface-color);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-  border: 1px solid #f1f3f5;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .settings-card header {
@@ -29,12 +31,13 @@
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 0.85rem;
-  background: #e9ecef;
+  background: var(--surface-alt);
+  color: var(--text-primary);
 }
 
 .badge-success {
-  background: #d3f9d8;
-  color: #2b8a3e;
+  background: var(--status-done-bg);
+  color: var(--status-done-color);
 }
 
 .settings-card .form-group {
@@ -47,8 +50,10 @@
 .settings-card select {
   padding: 10px;
   border-radius: 8px;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--border-color);
   font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .settings-actions {
@@ -58,12 +63,17 @@
 }
 
 .btn-danger {
-  background: #ff6b6b;
+  background: var(--danger-bg);
   color: #fff;
 }
 
 .btn-danger:hover {
-  background: #fa5252;
+  opacity: 0.9;
+}
+
+.settings-page .data-transfer-card {
+  margin-top: 8px;
+  padding: 32px;
 }
 
 @media (max-width: 768px) {

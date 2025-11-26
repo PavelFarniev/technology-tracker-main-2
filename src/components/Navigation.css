@@ -1,6 +1,6 @@
 .main-navigation {
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: var(--nav-bg);
+  box-shadow: var(--nav-shadow);
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
@@ -12,7 +12,7 @@
 
 .nav-brand h2 {
   margin: 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 1.5em;
 }
 
@@ -36,7 +36,7 @@
 .nav-menu a,
 .nav-menu button {
   text-decoration: none;
-  color: #666;
+  color: var(--text-muted);
   font-weight: 500;
   padding: 15px 0;
   position: relative;
@@ -55,11 +55,11 @@
 
 .nav-menu a:hover,
 .nav-menu button:hover {
-  color: #4ecdc4;
+  color: var(--accent-primary);
 }
 
 .nav-menu a.active {
-  color: #4ecdc4;
+  color: var(--accent-primary);
   font-weight: 600;
 }
 
@@ -70,8 +70,13 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: #4ecdc4;
+  background: var(--accent-primary);
   border-radius: 2px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
 }
 
 /* 🔥 Адаптивность */

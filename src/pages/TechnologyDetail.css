@@ -8,11 +8,11 @@
 .breadcrumbs {
   margin-bottom: 30px;
   font-size: 0.9em;
-  color: #666;
+  color: var(--text-muted);
 }
 
 .breadcrumbs a {
-  color: #4ecdc4;
+  color: var(--accent-primary);
   text-decoration: none;
 }
 
@@ -35,15 +35,15 @@
 
 .header-content h1 {
   margin: 0 0 10px 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 2.5em;
 }
 
 .status-badge-large {
   display: inline-block;
   padding: 8px 16px;
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
+  background: var(--surface-alt);
+  border: 2px solid var(--border-color);
   border-radius: 25px;
   font-weight: 600;
   font-size: 1.1em;
@@ -56,21 +56,21 @@
 }
 
 .btn-secondary {
-  background: #6c757d;
+  background: var(--text-muted);
   color: white;
 }
 
 .btn-secondary:hover {
-  background: #5a6268;
+  opacity: 0.9;
   transform: translateY(-2px);
 }
 
 /* 🔥 Контент */
 .detail-content {
-  background: white;
+  background: var(--surface-color);
   border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   margin-bottom: 30px;
 }
 
@@ -92,13 +92,13 @@
 .status-section h2,
 .notes-section h2,
 .meta-section h2 {
-  color: #333;
+  color: var(--text-primary);
   margin: 0 0 15px 0;
   font-size: 1.4em;
 }
 
 .description {
-  color: #666;
+  color: var(--text-muted);
   line-height: 1.6;
   font-size: 1.1em;
   margin: 0;
@@ -113,8 +113,8 @@
 
 .status-btn {
   padding: 12px 20px;
-  border: 2px solid #e9ecef;
-  background: white;
+  border: 2px solid var(--border-color);
+  background: var(--surface-color);
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
@@ -124,14 +124,14 @@
 }
 
 .status-btn:hover {
-  border-color: #4ecdc4;
+  border-color: var(--accent-primary);
   transform: translateY(-2px);
 }
 
 .status-btn.active {
-  border-color: #4ecdc4;
-  background: #f0fffe;
-  color: #4ecdc4;
+  border-color: var(--accent-primary);
+  background: var(--row-hover-bg);
+  color: var(--accent-primary);
   font-weight: 600;
 }
 
@@ -139,23 +139,25 @@
 .notes-textarea {
   width: 100%;
   padding: 15px;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-family: inherit;
   font-size: 1em;
   resize: vertical;
   transition: border-color 0.3s ease;
+  background: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .notes-textarea:focus {
   outline: none;
-  border-color: #4ecdc4;
+  border-color: var(--accent-primary);
 }
 
 .notes-hint {
   margin-top: 8px;
   font-size: 0.9em;
-  color: #666;
+  color: var(--text-muted);
   text-align: right;
 }
 
@@ -170,27 +172,27 @@
   display: flex;
   justify-content: space-between;
   padding: 12px;
-  background: #f8f9fa;
+  background: var(--surface-alt);
   border-radius: 6px;
-  border-left: 4px solid #4ecdc4;
+  border-left: 4px solid var(--accent-primary);
 }
 
 .meta-item strong {
-  color: #333;
+  color: var(--text-primary);
 }
 
 .status-text.not-started {
-  color: #ff6b6b;
+  color: var(--status-pending-color);
   font-weight: 600;
 }
 
 .status-text.in-progress {
-  color: #4ecdc4;
+  color: var(--status-progress-color);
   font-weight: 600;
 }
 
 .status-text.completed {
-  color: #51cf66;
+  color: var(--status-done-color);
   font-weight: 600;
 }
 
@@ -205,18 +207,18 @@
 .not-found {
   text-align: center;
   padding: 60px 40px;
-  background: white;
+  background: var(--surface-color);
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
 }
 
 .not-found h1 {
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 15px;
 }
 
 .not-found p {
-  color: #666;
+  color: var(--text-muted);
   margin-bottom: 25px;
   font-size: 1.1em;
 }

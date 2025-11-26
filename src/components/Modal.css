@@ -14,9 +14,9 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--surface-color);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--card-shadow);
   max-width: 95vw;
   width: min(640px, 95vw);
   max-height: 90vh;
@@ -46,7 +46,7 @@
 
 .modal-title {
   margin: 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 1.5em;
   font-weight: 600;
 }
@@ -56,7 +56,7 @@
   border: none;
   font-size: 28px;
   cursor: pointer;
-  color: #666;
+  color: var(--text-muted);
   padding: 4px 8px;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -64,8 +64,8 @@
 }
 
 .modal-close-btn:hover {
-  background: #f5f5f5;
-  color: #333;
+  background: var(--surface-alt);
+  color: var(--text-primary);
 }
 
 .modal-body {

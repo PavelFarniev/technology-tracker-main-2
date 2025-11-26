@@ -12,16 +12,17 @@
 }
 
 .stat-card {
-  background: #fff;
+  background: var(--surface-color);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-  border: 1px solid #f1f3f5;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .stat-label {
   font-size: 0.9rem;
-  color: #868e96;
+  color: var(--text-muted);
 }
 
 .stat-value {
@@ -29,7 +30,7 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin: 8px 0;
-  color: #212529;
+  color: var(--text-primary);
 }
 
 .stat-value.success {
@@ -46,11 +47,13 @@
 
 .chart-card,
 .insights-card {
-  background: #fff;
+  background: var(--surface-color);
   border-radius: 16px;
   padding: 30px;
-  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--card-shadow);
   margin-bottom: 30px;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .chart-header {
@@ -72,7 +75,7 @@
 .chart-score strong {
   display: block;
   font-size: 2rem;
-  color: #4ecdc4;
+  color: var(--accent-primary);
 }
 
 .progress-chart {
@@ -108,12 +111,13 @@
   display: block;
   margin-top: 12px;
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 .insights-card ul {
   margin: 0;
   padding-left: 20px;
-  color: #495057;
+  color: var(--text-muted);
 }
 
 .insights-card li {

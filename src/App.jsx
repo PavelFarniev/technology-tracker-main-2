@@ -12,6 +12,7 @@ import Statistics from './pages/Statistics.jsx';
 import Settings from './pages/Settings.jsx';
 import Login from './pages/Login.jsx';
 import RoadmapImport from './pages/RoadmapImport.jsx';
+import StudyPlan from './pages/StudyPlan.jsx';
 
 function App() {
   const location = useLocation();
@@ -57,6 +58,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/technologies" element={<TechnologyListPage />} />
             <Route path="/roadmap-import" element={<RoadmapImport />} />
+            <Route path="/study-plan" element={<StudyPlan />} />
             <Route path="/technology/:id" element={<TechnologyDetail />} />
             <Route path="/add-technology" element={<AddTechnology />} />
             <Route path="/statistics" element={<Statistics />} />

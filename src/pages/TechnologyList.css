@@ -14,38 +14,14 @@
 
 .header-content h1 {
   margin: 0 0 8px 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 2.2em;
 }
 
 .header-content p {
   margin: 0;
-  color: #666;
+  color: var(--text-muted);
   font-size: 1.1em;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
-  color: white;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
 }
 
 /* 🔥 Статистика */
@@ -54,18 +30,18 @@
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
   margin-bottom: 40px;
-  background: white;
+  background: var(--surface-color);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
 }
 
 .stat-item {
   text-align: center;
   padding: 15px;
-  background: #f8f9fa;
+  background: var(--surface-alt);
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-color);
 }
 
 .stat-number {
@@ -76,20 +52,20 @@
 }
 
 .stat-number.completed {
-  color: #51cf66;
+  color: var(--status-done-color);
 }
 
 .stat-number.in-progress {
-  color: #4ecdc4;
+  color: var(--status-progress-color);
 }
 
 .stat-number.not-started {
-  color: #ff6b6b;
+  color: var(--status-pending-color);
 }
 
 .stat-label {
   font-size: 0.9em;
-  color: #666;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -102,11 +78,11 @@
 }
 
 .technology-card {
-  background: white;
+  background: var(--surface-color);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e9ecef;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -129,7 +105,7 @@
 
 .card-header h3 {
   margin: 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 1.3em;
   flex: 1;
 }
@@ -143,25 +119,25 @@
 }
 
 .status-not-started {
-  background: #fff5f5;
-  color: #ff6b6b;
-  border: 1px solid #ff6b6b;
+  background: var(--status-pending-bg);
+  color: var(--status-pending-color);
+  border: 1px solid var(--status-pending-border);
 }
 
 .status-in-progress {
-  background: #f0fffe;
-  color: #4ecdc4;
-  border: 1px solid #4ecdc4;
+  background: var(--status-progress-bg);
+  color: var(--status-progress-color);
+  border: 1px solid var(--status-progress-border);
 }
 
 .status-completed {
-  background: #e8f5e9;
-  color: #51cf66;
-  border: 1px solid #51cf66;
+  background: var(--status-done-bg);
+  color: var(--status-done-color);
+  border: 1px solid var(--status-done-border);
 }
 
 .tech-description {
-  color: #666;
+  color: var(--text-muted);
   line-height: 1.5;
   margin: 0 0 15px 0;
   flex: 1;
@@ -169,21 +145,21 @@
 }
 
 .tech-notes-preview {
-  background: #f8f9fa;
+  background: var(--surface-alt);
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 15px;
-  border-left: 3px solid #4ecdc4;
+  border-left: 3px solid var(--accent-primary);
 }
 
 .tech-notes-preview strong {
-  color: #333;
+  color: var(--text-primary);
   font-size: 0.9em;
 }
 
 .tech-notes-preview p {
   margin: 5px 0 0 0;
-  color: #666;
+  color: var(--text-muted);
   font-size: 0.85em;
   line-height: 1.4;
 }
@@ -212,10 +188,10 @@
 .empty-state {
   text-align: center;
   padding: 60px 40px;
-  background: white;
+  background: var(--surface-color);
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border: 2px dashed #e9ecef;
+  box-shadow: var(--card-shadow);
+  border: 2px dashed var(--border-color);
 }
 
 .empty-icon {
@@ -225,13 +201,13 @@
 
 .empty-state h3 {
   margin: 0 0 10px 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 1.5em;
 }
 
 .empty-state p {
   margin: 0 0 25px 0;
-  color: #666;
+  color: var(--text-muted);
   font-size: 1.1em;
 }
 

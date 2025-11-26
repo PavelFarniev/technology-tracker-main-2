@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import ThemeToggle from './ThemeToggle.jsx';
 import './Navigation.css';
 
 function Navigation() {
@@ -29,6 +30,14 @@ function Navigation() {
             className={location.pathname === '/technologies' ? 'active' : ''}
           >
             📚 Все технологии
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/study-plan"
+            className={location.pathname === '/study-plan' ? 'active' : ''}
+          >
+            🗓️ План обучения
           </Link>
         </li>
         <li>
@@ -76,6 +85,9 @@ function Navigation() {
               🔐 Войти
             </Link>
           )}
+        </li>
+        <li className="theme-toggle">
+          <ThemeToggle />
         </li>
       </ul>
     </nav>

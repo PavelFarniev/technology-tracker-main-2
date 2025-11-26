@@ -7,11 +7,11 @@
 .breadcrumbs {
   margin-bottom: 25px;
   font-size: 0.9em;
-  color: #6c757d;
+  color: var(--text-muted);
 }
 
 .breadcrumbs a {
-  color: #4ecdc4;
+  color: var(--accent-primary);
   text-decoration: none;
 }
 
@@ -24,21 +24,21 @@
 }
 
 .add-technology-form {
-  background: #ffffff;
+  background: var(--surface-color);
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--card-shadow);
 }
 
 .form-header h1 {
   margin: 0 0 8px;
   font-size: 2rem;
-  color: #212529;
+  color: var(--text-primary);
 }
 
 .form-header p {
   margin: 0 0 24px;
-  color: #6c757d;
+  color: var(--text-muted);
 }
 
 .technology-form {
@@ -55,7 +55,7 @@
 
 .form-label {
   font-weight: 600;
-  color: #343a40;
+  color: var(--text-primary);
 }
 
 .form-input,
@@ -63,20 +63,21 @@
 .form-select {
   width: 100%;
   padding: 14px 16px;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   font-size: 1rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   font-family: inherit;
-  background: #fdfdfd;
+  background: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
   outline: none;
-  border-color: #4ecdc4;
-  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.15);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.25);
 }
 
 .form-textarea {
@@ -90,7 +91,7 @@
 
 .form-hint {
   font-size: 0.9rem;
-  color: #868e96;
+  color: var(--text-muted);
 }
 
 .error {
@@ -111,14 +112,14 @@
 }
 
 .btn-outline {
-  border: 2px solid #ced4da;
+  border: 2px solid var(--border-color);
   background: transparent;
-  color: #495057;
+  color: var(--text-primary);
 }
 
 .btn-outline:hover {
-  border-color: #4ecdc4;
-  color: #4ecdc4;
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
   transform: translateY(-2px);
 }
 

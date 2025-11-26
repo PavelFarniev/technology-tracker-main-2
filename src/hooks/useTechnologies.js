@@ -67,6 +67,17 @@ export function useTechnologies() {
     );
   };
 
+  const updateStatusesByIds = (ids, newStatus) => {
+    if (!Array.isArray(ids) || !ids.length) {
+      return;
+    }
+
+    const idSet = new Set(ids);
+    setTechnologies((prevTech) =>
+      prevTech.map((tech) => (idSet.has(tech.id) ? { ...tech, status: newStatus } : tech))
+    );
+  };
+
   // 🔥 Массовое обновление статусов
   const updateAllStatuses = (newStatus) => {
     setTechnologies(prevTech => 
@@ -126,6 +137,7 @@ export function useTechnologies() {
     setTechnologies,
     updateTechnologyStatus,
     updateTechnologyNotes,
+    updateStatusesByIds,
     updateAllStatuses,
     getStatistics,
     exportData,

@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useTechnologies } from '../hooks/useTechnologies';
+import BulkStatusEditor from '../components/BulkStatusEditor.jsx';
 import './TechnologyList.css';
 
 function TechnologyList() {
-  const { technologies } = useTechnologies();
+  const { technologies, updateStatusesByIds } = useTechnologies();
+
+  const handleBulkStatusChange = (ids, status) => {
+    updateStatusesByIds(ids, status);
+  };
 
   // 🔥 Статусы на русском
   const getStatusText = (status) => {
@@ -36,6 +41,8 @@ function TechnologyList() {
           ➕ Добавить технологию
         </Link>
       </div>
+
+      <BulkStatusEditor technologies={technologies} onApply={handleBulkStatusChange} />
 
       {/* 🔥 Статистика */}
       <div className="stats-overview">

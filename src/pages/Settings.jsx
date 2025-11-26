@@ -1,17 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { useTechnologies } from '../hooks/useTechnologies';
 import { useAuth } from '../context/AuthContext';
+import DataImportExport from '../components/DataImportExport.jsx';
 import './Settings.css';
 
 function Settings() {
-  const { updateAllStatuses, resetToInitial, exportData } = useTechnologies();
+  const { technologies, setTechnologies, resetToInitial } = useTechnologies();
   const { user, logout } = useAuth();
-  const [statusPreset, setStatusPreset] = useState('not-started');
-
-  const handleMassUpdate = () => {
-    updateAllStatuses(statusPreset);
-  };
 
   return (
     <div className="page settings-page">
@@ -45,34 +40,18 @@ function Settings() {
 
         <section className="settings-card">
           <header>
-            <h2>Управление данными</h2>
+            <h2>Сброс и отладка</h2>
           </header>
-          <div className="form-group">
-            <label htmlFor="statusPreset">Массовый статус</label>
-            <select
-              id="statusPreset"
-              value={statusPreset}
-              onChange={(e) => setStatusPreset(e.target.value)}
-            >
-              <option value="not-started">⏳ Не начато</option>
-              <option value="in-progress">🔄 В процессе</option>
-              <option value="completed">✅ Завершено</option>
-            </select>
-            <button className="btn btn-primary" onClick={handleMassUpdate}>
-              Обновить все технологии
-            </button>
-          </div>
-
+          <p>Можно быстро вернуть данные к начальному состоянию для тестирования.</p>
           <div className="settings-actions">
-            <button className="btn btn-secondary" onClick={exportData}>
-              💾 Экспорт данных
-            </button>
             <button className="btn btn-danger" onClick={resetToInitial}>
               ♻️ Сбросить к начальным данным
             </button>
           </div>
         </section>
       </div>
+
+      <DataImportExport technologies={technologies} setTechnologies={setTechnologies} />
     </div>
   );
 }
