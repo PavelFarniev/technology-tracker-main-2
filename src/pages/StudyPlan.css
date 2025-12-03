@@ -1,0 +1,220 @@
+.study-plan-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.study-plan-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+.study-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.study-card {
+    background: var(--surface-color);
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+}
+
+.study-card header {
+    margin-bottom: 20px;
+}
+
+.eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.study-card h2 {
+    margin: 4px 0 0;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.study-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 12px 14px;
+    font-size: 1rem;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-color: transparent;
+}
+
+.form-field-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.field-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.study-form .error-message {
+    font-size: 0.85rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.live-region {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.plans-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.plans-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.plan-item {
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px;
+    background: var(--surface-alt);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.plan-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.plan-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.plan-goal,
+.plan-meta {
+    margin: 4px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.plan-status {
+    font-weight: 600;
+}
+
+.plan-status-scheduled {
+    color: var(--status-progress-color);
+}
+
+.plan-status-completed {
+    color: var(--status-done-color);
+}
+
+.plan-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.empty-plans {
+    border: 2px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    border: 0;
+}
+
+.btn-danger {
+    background: var(--danger-bg);
+    color: #fff;
+}
+
+.btn-danger:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .study-plan-page {
+        padding: 15px;
+    }
+
+    .study-plan-hero {
+        flex-direction: column;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+

@@ -1,0 +1,181 @@
+.bulk-status-card {
+    background: var(--surface-color);
+    border-radius: 18px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.bulk-status-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.bulk-eyebrow {
+    margin: 0 0 4px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.bulk-status-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+}
+
+.bulk-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.bulk-search,
+.bulk-select {
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.bulk-search:focus,
+.bulk-select:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-color: transparent;
+}
+
+.bulk-table-wrapper {
+    overflow-x: auto;
+}
+
+.bulk-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bulk-table th,
+.bulk-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.bulk-table th {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.bulk-table tbody tr:hover {
+    background: var(--row-hover-bg);
+}
+
+.bulk-tech-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.bulk-tech-description {
+    margin: 8px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.checkbox-label input {
+    width: 18px;
+    height: 18px;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.status-pill.status-not-started {
+    background: var(--status-pending-bg);
+    color: var(--status-pending-color);
+    border: 1px solid var(--status-pending-border);
+}
+
+.status-pill.status-in-progress {
+    background: var(--status-progress-bg);
+    color: var(--status-progress-color);
+    border: 1px solid var(--status-progress-border);
+}
+
+.status-pill.status-completed {
+    background: var(--status-done-bg);
+    color: var(--status-done-color);
+    border: 1px solid var(--status-done-border);
+}
+
+.bulk-status-footer {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bulk-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 32px 12px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (max-width: 768px) {
+    .bulk-status-card {
+        padding: 18px;
+    }
+
+    .bulk-header-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bulk-header-actions > * {
+        width: 100%;
+    }
+
+    .bulk-table th,
+    .bulk-table td {
+        padding: 10px 8px;
+    }
+}
+
+

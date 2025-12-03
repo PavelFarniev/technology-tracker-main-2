@@ -1,0 +1,13 @@
+.theme-toggle-btn {
+    border-radius: 12px !important;
+    background-color: var(--control-bg);
+    box-shadow: var(--chip-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--chip-shadow-hover);
+}
+
+
