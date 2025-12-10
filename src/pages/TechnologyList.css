@@ -36,6 +36,88 @@
     box-shadow: var(--card-shadow);
 }
 
+/* 🔥 Секция фильтров и поиска */
+.filters-section {
+    margin-bottom: 30px;
+    background: var(--surface-color);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--surface-alt);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+.clear-search-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.clear-search-btn:hover {
+    color: var(--text-primary);
+    background: var(--surface-color);
+}
+
+.status-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.status-filter-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-alt);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.status-filter-btn:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-filter-btn.active {
+    background: linear-gradient(135deg, var(--btn-primary-start), var(--btn-primary-end));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--btn-primary-shadow);
+}
+
 .status-controls {
     display: flex;
     flex-wrap: wrap;

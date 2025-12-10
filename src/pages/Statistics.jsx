@@ -29,6 +29,7 @@ function Statistics() {
     ]), [stats.completed, stats.inProgress, stats.notStarted]);
 
     const maxValue = Math.max(...progressData.map(item => item.value), 1);
+    const totalValue = progressData.reduce((sum, item) => sum + item.value, 0);
 
     return (
         <div className="page statistics-page">
@@ -84,20 +85,36 @@ function Statistics() {
                 </div>
 
                 <div className="progress-chart">
-                    {progressData.map(item => (
-                        <div key={item.key} className="chart-bar">
-                            <div
-                                className="bar-fill"
-                                style={{
-                                    height: `${(item.value / maxValue) * 100}%`,
-                                    backgroundColor: item.color
-                                }}
-                            >
-                                <span className="bar-value">{item.value}</span>
-                            </div>
-                            <span className="bar-label">{item.label}</span>
+                    {totalValue === 0 ? (
+                        <div style={{ 
+                            textAlign: 'center', 
+                            width: '100%', 
+                            padding: '40px',
+                            color: 'var(--text-muted)'
+                        }}>
+                            <p>Нет данных для отображения графика</p>
                         </div>
-                    ))}
+                    ) : (
+                        progressData.map(item => {
+                            const heightPercent = maxValue > 0 ? (item.value / maxValue) * 100 : 0;
+                            return (
+                                <div key={item.key} className="chart-bar">
+                                    <div
+                                        className="bar-fill"
+                                        style={{
+                                            height: `${Math.max(heightPercent, 2)}%`,
+                                            backgroundColor: item.color
+                                        }}
+                                    >
+                                        {item.value > 0 && (
+                                            <span className="bar-value">{item.value}</span>
+                                        )}
+                                    </div>
+                                    <span className="bar-label">{item.label}</span>
+                                </div>
+                            );
+                        })
+                    )}
                 </div>
             </div>
 

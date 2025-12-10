@@ -65,10 +65,26 @@ export function AppThemeProvider({ children }) {
                         }
                     }
                 },
-                MuiSnackbarContent: {
+                MuiSnackbar: {
                     styleOverrides: {
                         root: {
-                            borderRadius: 14
+                            zIndex: 1400
+                        }
+                    }
+                },
+                MuiAlert: {
+                    styleOverrides: {
+                        root: {
+                            borderRadius: 14,
+                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                        }
+                    }
+                },
+                MuiDialog: {
+                    styleOverrides: {
+                        paper: {
+                            borderRadius: 12,
+                            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)'
                         }
                     }
                 }

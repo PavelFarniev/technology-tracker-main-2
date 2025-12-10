@@ -1,16 +1,21 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useMemo } from 'react';
 import { useTechnologies } from '../hooks/useTechnologies';
 import { useNotifier } from '../context/NotificationContext.jsx';
 import BulkStatusEditor from '../components/BulkStatusEditor.jsx';
 import Modal from '../components/Modal.jsx';
+import ProgressHeader from '../components/ProgressHeader.jsx';
+import QuickActions from '../components/QuickActions.jsx';
 import './TechnologyList.css';
 
 function TechnologyList() {
-    const { technologies, updateTechnologyStatus, updateAllStatuses, updateStatusesByIds } =
+    const { technologies, updateTechnologyStatus, updateAllStatuses, updateStatusesByIds, exportData } =
         useTechnologies();
     const { notify } = useNotifier();
+    const navigate = useNavigate();
     const [isBulkEditorOpen, setIsBulkEditorOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [statusFilter, setStatusFilter] = useState('all'); // 'all', 'completed', 'in-progress', 'not-started'
 
     const handleBulkStatusChange = (ids, status) => {
         updateStatusesByIds(ids, status);
@@ -64,6 +69,36 @@ function TechnologyList() {
         return statusClassMap[status] || '';
     };
 
+    // 🔥 Фильтрация технологий по поисковому запросу и статусу
+    const filteredTechnologies = useMemo(() => {
+        let filtered = technologies;
+
+        // Фильтр по поисковому запросу
+        if (searchQuery.trim()) {
+            const query = searchQuery.toLowerCase().trim();
+            filtered = filtered.filter(tech =>
+                tech.title.toLowerCase().includes(query) ||
+                (tech.description && tech.description.toLowerCase().includes(query))
+            );
+        }
+
+        // Фильтр по статусу
+        if (statusFilter !== 'all') {
+            filtered = filtered.filter(tech => tech.status === statusFilter);
+        }
+
+        return filtered;
+    }, [technologies, searchQuery, statusFilter]);
+
+    const handleRandomSelect = (techId) => {
+        // Переходим на страницу деталей выбранной технологии
+        navigate(`/technology/${techId}`);
+        notify({
+            message: 'Технология выбрана для изучения',
+            severity: 'info'
+        });
+    };
+
     return (
         <div className="page technology-list-page">
             <div className="page-header">
@@ -74,6 +109,65 @@ function TechnologyList() {
                 <Link to="/add-technology" className="btn btn-primary">
                     ➕ Добавить технологию
                 </Link>
+            </div>
+
+            {/* 🔥 ProgressHeader - статистика по дорожной карте */}
+            <ProgressHeader technologies={technologies} />
+
+            {/* 🔥 QuickActions - быстрые действия */}
+            <QuickActions
+                technologies={technologies}
+                onUpdateAllStatuses={updateAllStatuses}
+                onRandomSelect={handleRandomSelect}
+            />
+
+            {/* 🔥 Поиск и фильтры */}
+            <div className="filters-section">
+                <div className="search-container">
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="🔍 Поиск по названию технологий..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    {searchQuery && (
+                        <button
+                            className="clear-search-btn"
+                            onClick={() => setSearchQuery('')}
+                            aria-label="Очистить поиск"
+                        >
+                            ✕
+                        </button>
+                    )}
+                </div>
+
+                <div className="status-filters">
+                    <button
+                        className={`status-filter-btn ${statusFilter === 'all' ? 'active' : ''}`}
+                        onClick={() => setStatusFilter('all')}
+                    >
+                        Все
+                    </button>
+                    <button
+                        className={`status-filter-btn ${statusFilter === 'completed' ? 'active' : ''}`}
+                        onClick={() => setStatusFilter('completed')}
+                    >
+                        ✅ Завершено
+                    </button>
+                    <button
+                        className={`status-filter-btn ${statusFilter === 'in-progress' ? 'active' : ''}`}
+                        onClick={() => setStatusFilter('in-progress')}
+                    >
+                        🔄 В процессе
+                    </button>
+                    <button
+                        className={`status-filter-btn ${statusFilter === 'not-started' ? 'active' : ''}`}
+                        onClick={() => setStatusFilter('not-started')}
+                    >
+                        ⏳ Не начато
+                    </button>
+                </div>
             </div>
 
             <div style={{ marginBottom: '20px' }}>
@@ -147,7 +241,29 @@ function TechnologyList() {
 
             {/* 🔥 Сетка технологий */}
             <div className="technologies-grid">
-                {technologies.map(tech => (
+                {filteredTechnologies.length === 0 ? (
+                    <div className="empty-state">
+                        <div className="empty-icon">🔍</div>
+                        <h3>Ничего не найдено</h3>
+                        <p>
+                            {searchQuery || statusFilter !== 'all'
+                                ? 'Попробуйте изменить параметры поиска или фильтры'
+                                : 'Технологий пока нет'}
+                        </p>
+                        {(searchQuery || statusFilter !== 'all') && (
+                            <button
+                                className="btn btn-primary"
+                                onClick={() => {
+                                    setSearchQuery('');
+                                    setStatusFilter('all');
+                                }}
+                            >
+                                Сбросить фильтры
+                            </button>
+                        )}
+                    </div>
+                ) : (
+                    filteredTechnologies.map(tech => (
                     <div key={tech.id} className="technology-card">
                         <div className="card-header">
                             <h3>{tech.title}</h3>
@@ -176,7 +292,8 @@ function TechnologyList() {
                             </Link>
                         </div>
                     </div>
-                ))}
+                    ))
+                )}
             </div>
 
             {/* 🔥 Состояние пустого списка */}

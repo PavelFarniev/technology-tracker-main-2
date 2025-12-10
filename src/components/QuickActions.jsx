@@ -1,74 +1,70 @@
+import { useState } from 'react';
 import './QuickActions.css';
 
 function QuickActions({
                           technologies,
                           onUpdateAllStatuses,
-                          onRandomSelect,
-                          onExport,
-                          onReset
+                          onRandomSelect
                       }) {
-
-    const markAllCompleted = () => {
-        onUpdateAllStatuses('completed');
-    };
+    const [randomMessage, setRandomMessage] = useState('');
 
     const resetAll = () => {
-        onUpdateAllStatuses('not-started');
+        if (window.confirm('⚠️ Вы уверены, что хотите сбросить все статусы на "Не начато"? Это действие нельзя отменить.')) {
+            onUpdateAllStatuses('not-started');
+        }
     };
 
-    const getRandomInProgress = () => {
+    const getRandomTechnology = () => {
+        // Выбираем только технологии со статусом "not-started"
         const notStarted = technologies.filter(tech => tech.status === 'not-started');
+        
         if (notStarted.length > 0) {
             const randomTech = notStarted[Math.floor(Math.random() * notStarted.length)];
-            onRandomSelect(randomTech.id);
-        } else {
-            alert('🎉 Все технологии уже начаты или завершены!');
-        }
-    };
-
-    const handleExport = () => {
-        if (onExport) {
-            onExport();
-            alert('✅ Данные успешно экспортированы! Файл скачан на ваш компьютер.');
-        }
-    };
-
-    const handleReset = () => {
-        if (window.confirm('⚠️ Вы уверены, что хотите сбросить все данные к начальному состоянию? Это действие нельзя отменить.')) {
-            if (onReset) {
-                onReset();
-                alert('✅ Все данные сброшены к начальному состоянию.');
+            if (onRandomSelect) {
+                onRandomSelect(randomTech.id);
             }
+            setRandomMessage(`🎲 Выбрана технология: "${randomTech.title}"`);
+            setTimeout(() => setRandomMessage(''), 3000);
+        } else {
+            // Проверяем, все ли технологии в процессе или завершены
+            const allInProgressOrCompleted = technologies.every(
+                tech => tech.status === 'in-progress' || tech.status === 'completed'
+            );
+            
+            if (allInProgressOrCompleted && technologies.length > 0) {
+                setRandomMessage('⚠️ Невозможно выбрать новую технологию для изучения. Все технологии уже имеют статус "В процессе" или "Завершено".');
+            } else if (technologies.length === 0) {
+                setRandomMessage('⚠️ Нет доступных технологий для выбора.');
+            } else {
+                setRandomMessage('⚠️ Нет технологий со статусом "Не начато" для случайного выбора.');
+            }
+            setTimeout(() => setRandomMessage(''), 5000);
         }
     };
 
-    const completedCount = technologies.filter(tech => tech.status === 'completed').length;
-    const totalCount = technologies.length;
+    const notStartedCount = technologies.filter(tech => tech.status === 'not-started').length;
 
     return (
         <div className="quick-actions">
             <h3>⚡ Быстрые действия</h3>
+            
+            {randomMessage && (
+                <div className={`random-message ${randomMessage.includes('⚠️') ? 'error' : 'success'}`}>
+                    {randomMessage}
+                </div>
+            )}
+
             <div className="action-buttons">
-                <button onClick={markAllCompleted} className="action-btn completed" disabled={completedCount === totalCount}>
-                    ✅ Отметить все как выполненные
-                    {completedCount === totalCount && ' (все уже выполнены)'}
-                </button>
-
-                <button onClick={resetAll} className="action-btn reset" disabled={completedCount === 0}>
+                <button onClick={resetAll} className="action-btn reset">
                     🔄 Сбросить все статусы
-                    {completedCount === 0 && ' (нечего сбрасывать)'}
                 </button>
 
-                <button onClick={getRandomInProgress} className="action-btn random">
-                    🎲 Случайный выбор технологии
-                </button>
-
-                <button onClick={handleExport} className="action-btn export">
-                    📤 Экспорт данных
-                </button>
-
-                <button onClick={handleReset} className="action-btn danger">
-                    🗑️ Сбросить все данные
+                <button 
+                    onClick={getRandomTechnology} 
+                    className="action-btn random"
+                    disabled={notStartedCount === 0 && technologies.length > 0}
+                >
+                    🎲 Случайный выбор следующей технологии
                 </button>
             </div>
         </div>

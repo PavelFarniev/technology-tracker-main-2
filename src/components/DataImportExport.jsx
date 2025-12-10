@@ -107,30 +107,78 @@ function DataImportExport({ technologies, setTechnologies }) {
             return;
         }
 
-        const payload = {
-            technologies,
-            exportedAt: new Date().toISOString()
-        };
+        try {
+            const payload = {
+                technologies,
+                exportedAt: new Date().toISOString(),
+                version: '1.0',
+                totalCount: technologies.length
+            };
 
-        const blob = new Blob([JSON.stringify(payload, null, 2)], {
-            type: 'application/json'
-        });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `technologies_${new Date().toISOString().split('T')[0]}.json`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
+            // Валидация данных перед экспортом
+            const validationErrors = technologies.filter(tech => 
+                !tech.id || !tech.title || !tech.description || !tech.status
+            );
 
-        updateStatus('Данные экспортированы в JSON', 'success');
-        notify({ message: 'Экспорт завершён', severity: 'success' });
+            if (validationErrors.length > 0) {
+                updateStatus(`Предупреждение: ${validationErrors.length} технологий с неполными данными`, 'warning');
+            }
+
+            const jsonString = JSON.stringify(payload, null, 2);
+            
+            // Проверка, что JSON валиден
+            JSON.parse(jsonString);
+
+            const blob = new Blob([jsonString], {
+                type: 'application/json;charset=utf-8'
+            });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `technologies_${new Date().toISOString().split('T')[0]}.json`;
+            link.setAttribute('aria-label', 'Скачать экспортированные данные');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            updateStatus('Данные экспортированы в JSON', 'success');
+            notify({ message: 'Экспорт завершён', severity: 'success' });
+        } catch (error) {
+            console.error('Ошибка экспорта', error);
+            updateStatus('Ошибка при экспорте данных', 'error');
+            notify({ message: 'Не удалось экспортировать данные', severity: 'error' });
+        }
     };
 
     const parseAndApplyImport = async (file) => {
-        const text = await file.text();
-        const json = JSON.parse(text);
+        // Проверка типа файла
+        if (file.type && file.type !== 'application/json' && !file.name.endsWith('.json')) {
+            throw new Error('Файл должен быть в формате JSON');
+        }
+
+        let text;
+        try {
+            text = await file.text();
+        } catch (error) {
+            throw new Error('Не удалось прочитать файл. Проверьте, что файл не поврежден.');
+        }
+
+        if (!text || !text.trim()) {
+            throw new Error('Файл пуст или содержит только пробелы');
+        }
+
+        let json;
+        try {
+            json = JSON.parse(text);
+        } catch (error) {
+            throw new Error(`Ошибка парсинга JSON: ${error.message}. Убедитесь, что файл содержит валидный JSON.`);
+        }
+
+        if (!json || (typeof json !== 'object' && !Array.isArray(json))) {
+            throw new Error('JSON должен содержать объект или массив');
+        }
+
         const normalized = normalizePayload(json);
         const report = buildValidationReport(normalized);
         applyValidatedData(report);

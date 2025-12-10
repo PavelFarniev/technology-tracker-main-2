@@ -263,15 +263,32 @@ function StudyPlan() {
                         </div>
 
                         <div className="form-actions">
-                            <button type="reset" className="btn btn-outline" onClick={() => setFormData(defaultFormState)}>
+                            <button 
+                                type="reset" 
+                                className="btn btn-outline" 
+                                onClick={() => setFormData(defaultFormState)}
+                                aria-label="Очистить форму"
+                            >
                                 Очистить
                             </button>
-                            <button type="submit" className="btn btn-primary" disabled={!isFormValid}>
+                            <button 
+                                type="submit" 
+                                className="btn btn-primary" 
+                                disabled={!isFormValid}
+                                aria-describedby={!isFormValid ? "form-validation-summary" : undefined}
+                            >
                                 Сохранить план
                             </button>
                         </div>
 
-                        <div className="live-region" role="status" aria-live="polite" aria-atomic="true">
+                        <div 
+                            id="form-validation-summary"
+                            className="live-region" 
+                            role="status" 
+                            aria-live="polite" 
+                            aria-atomic="true"
+                            aria-label="Статус валидации формы"
+                        >
                             {isFormValid
                                 ? 'Форма заполнена корректно'
                                 : errorSummary || 'Исправьте ошибки перед сохранением'}

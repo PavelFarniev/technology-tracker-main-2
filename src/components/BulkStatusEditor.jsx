@@ -120,6 +120,12 @@ function BulkStatusEditor({ technologies, onApply }) {
                                         type="checkbox"
                                         checked={allVisibleSelected}
                                         onChange={toggleAllVisible}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                toggleAllVisible();
+                                            }
+                                        }}
                                         aria-label="Выбрать все на странице"
                                     />
                                     <span>Все</span>
@@ -141,12 +147,18 @@ function BulkStatusEditor({ technologies, onApply }) {
                             <tr key={tech.id}>
                                 <td>
                                     <label className="checkbox-label">
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedIds.includes(tech.id)}
-                                            onChange={() => toggleSelection(tech.id)}
-                                            aria-label={`Выбрать технологию ${tech.title}`}
-                                        />
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedIds.includes(tech.id)}
+                                        onChange={() => toggleSelection(tech.id)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                toggleSelection(tech.id);
+                                            }
+                                        }}
+                                        aria-label={`Выбрать технологию ${tech.title}`}
+                                    />
                                         <span className="visually-hidden">{tech.title}</span>
                                     </label>
                                 </td>

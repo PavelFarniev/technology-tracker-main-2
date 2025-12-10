@@ -1,15 +1,15 @@
 .progress-header {
-    background: white;
+    background: var(--surface-color);
     border-radius: 12px;
     padding: 24px;
     margin: 20px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e9ecef;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
 }
 
 .progress-header h2 {
     margin: 0 0 20px 0;
-    color: #333;
+    color: var(--text-primary);
     text-align: center;
     font-size: 1.5em;
 }
@@ -34,14 +34,14 @@
     text-align: center;
     padding: 16px 12px;
     border-radius: 8px;
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
+    background: var(--surface-alt);
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
 }
 
 .stat-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-shadow);
 }
 
 .stat-number {
@@ -52,28 +52,29 @@
 }
 
 .stat-number.total {
-    color: #495057;
+    color: var(--text-primary);
 }
 
 .stat-number.completed {
-    color: #51cf66;
+    color: var(--status-done-color);
 }
 
 .stat-number.in-progress {
-    color: #4ecdc4;
+    color: var(--status-progress-color);
 }
 
 .stat-number.not-started {
-    color: #ff6b6b;
+    color: var(--status-pending-color);
 }
 
-.stat-number.notes {
-    color: #cc5de8;
+.stat-number.percentage {
+    color: var(--accent-primary);
+    font-size: 2em;
 }
 
 .stat-label {
     font-size: 0.85em;
-    color: #666;
+    color: var(--text-muted);
     font-weight: 500;
 }
 

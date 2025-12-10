@@ -1,8 +1,9 @@
 .progress-bar {
-    background: #f0f0f0;
+    background: var(--surface-alt);
     border-radius: 10px;
     overflow: hidden;
     position: relative;
+    border: 1px solid var(--border-color);
 }
 
 /* 🔥 Размеры */
@@ -16,6 +17,19 @@
 
 .progress-large {
     height: 24px;
+}
+
+/* 🔥 Заполнение */
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8px;
+    min-width: 2px;
 }
 
 /* 🔥 Цвета */
@@ -39,20 +53,18 @@
     background: linear-gradient(90deg, #cc5de8, #be4bdb);
 }
 
-/* 🔥 Заполнение */
-.progress-fill {
-    height: 100%;
-    border-radius: 10px;
-    transition: width 0.5s ease;
+/* 🔥 Анимация полосок - применяется поверх градиента */
+.progress-striped .progress-fill {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 8px;
 }
 
-/* 🔥 Анимация полосок */
-.progress-striped .progress-fill {
+.progress-striped .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-size: 30px 30px;
     background-image: linear-gradient(
             45deg,
@@ -64,11 +76,14 @@
             transparent 75%,
             transparent
     );
+    border-radius: 10px;
+    pointer-events: none;
 }
 
-.progress-animated.progress-striped .progress-fill {
+.progress-animated.progress-striped .progress-fill::after {
     animation: progressStripes 1s linear infinite;
 }
+
 
 @keyframes progressStripes {
     0% { background-position: 0 0; }
@@ -88,7 +103,7 @@
     margin-top: 8px;
     text-align: center;
     font-size: 0.9em;
-    color: #666;
+    color: var(--text-primary);
     font-weight: 500;
 }
 

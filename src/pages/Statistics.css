@@ -83,12 +83,17 @@
     align-items: flex-end;
     gap: 30px;
     min-height: 220px;
+    padding: 20px 0;
 }
 
 .chart-bar {
     flex: 1;
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 220px;
+    justify-content: flex-end;
 }
 
 .bar-fill {
@@ -100,6 +105,7 @@
     padding-bottom: 12px;
     min-height: 6px;
     transition: height 0.4s ease;
+    position: relative;
 }
 
 .bar-value {
