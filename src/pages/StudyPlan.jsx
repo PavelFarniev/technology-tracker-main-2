@@ -114,6 +114,15 @@ function StudyPlan() {
 
     const updatePlanStatus = (planId, status) => {
         setPlans((prev) => prev.map((plan) => (plan.id === planId ? { ...plan, status } : plan)));
+        const plan = plans.find(p => p.id === planId);
+        if (plan) {
+            const statusText = status === 'completed' ? 'Завершено' : 'Активен';
+            notify({
+                message: `План "${plan.technologyTitle}" помечен как "${statusText}"`,
+                severity: status === 'completed' ? 'success' : 'info',
+                autoHideDuration: 3000
+            });
+        }
     };
 
     const deletePlan = (planId) => {

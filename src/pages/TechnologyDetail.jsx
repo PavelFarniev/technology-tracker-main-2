@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTechnologies } from '../hooks/useTechnologies';
 import { useNotifier } from '../context/NotificationContext.jsx';
 import './TechnologyDetail.css';
@@ -61,12 +61,39 @@ function TechnologyDetail() {
         });
     };
 
+    const notesSaveTimeoutRef = useRef(null);
+
     // 🔥 Функция изменения заметок
     const handleNotesChange = (newNotes) => {
         if (!technology) return;
         updateTechnologyNotes(technology.id, newNotes);
         setTechnology(prev => prev ? { ...prev, notes: newNotes } : prev);
+        
+        // Очищаем предыдущий таймер
+        if (notesSaveTimeoutRef.current) {
+            clearTimeout(notesSaveTimeoutRef.current);
+        }
+        
+        // Показываем уведомление с задержкой, чтобы не спамить
+        if (newNotes.trim()) {
+            notesSaveTimeoutRef.current = setTimeout(() => {
+                notify({
+                    message: 'Заметка сохранена',
+                    severity: 'success',
+                    autoHideDuration: 2000
+                });
+            }, 1000);
+        }
     };
+
+    // Очистка таймера при размонтировании
+    useEffect(() => {
+        return () => {
+            if (notesSaveTimeoutRef.current) {
+                clearTimeout(notesSaveTimeoutRef.current);
+            }
+        };
+    }, []);
 
     const validateDeadline = (value) => {
         if (!value) {

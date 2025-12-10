@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useNotifier } from '../context/NotificationContext.jsx';
 import './QuickActions.css';
 
 function QuickActions({
@@ -6,11 +6,16 @@ function QuickActions({
                           onUpdateAllStatuses,
                           onRandomSelect
                       }) {
-    const [randomMessage, setRandomMessage] = useState('');
+    const { notify } = useNotifier();
 
     const resetAll = () => {
         if (window.confirm('⚠️ Вы уверены, что хотите сбросить все статусы на "Не начато"? Это действие нельзя отменить.')) {
             onUpdateAllStatuses('not-started');
+            notify({
+                message: 'Все статусы сброшены на "Не начато"',
+                severity: 'info',
+                autoHideDuration: 4000
+            });
         }
     };
 
@@ -23,8 +28,11 @@ function QuickActions({
             if (onRandomSelect) {
                 onRandomSelect(randomTech.id);
             }
-            setRandomMessage(`🎲 Выбрана технология: "${randomTech.title}"`);
-            setTimeout(() => setRandomMessage(''), 3000);
+            notify({
+                message: `🎲 Выбрана технология: "${randomTech.title}"`,
+                severity: 'success',
+                autoHideDuration: 3000
+            });
         } else {
             // Проверяем, все ли технологии в процессе или завершены
             const allInProgressOrCompleted = technologies.every(
@@ -32,13 +40,24 @@ function QuickActions({
             );
             
             if (allInProgressOrCompleted && technologies.length > 0) {
-                setRandomMessage('⚠️ Невозможно выбрать новую технологию для изучения. Все технологии уже имеют статус "В процессе" или "Завершено".');
+                notify({
+                    message: '⚠️ Невозможно выбрать новую технологию для изучения. Все технологии уже имеют статус "В процессе" или "Завершено".',
+                    severity: 'warning',
+                    autoHideDuration: 5000
+                });
             } else if (technologies.length === 0) {
-                setRandomMessage('⚠️ Нет доступных технологий для выбора.');
+                notify({
+                    message: '⚠️ Нет доступных технологий для выбора.',
+                    severity: 'warning',
+                    autoHideDuration: 4000
+                });
             } else {
-                setRandomMessage('⚠️ Нет технологий со статусом "Не начато" для случайного выбора.');
+                notify({
+                    message: '⚠️ Нет технологий со статусом "Не начато" для случайного выбора.',
+                    severity: 'warning',
+                    autoHideDuration: 4000
+                });
             }
-            setTimeout(() => setRandomMessage(''), 5000);
         }
     };
 
@@ -47,12 +66,6 @@ function QuickActions({
     return (
         <div className="quick-actions">
             <h3>⚡ Быстрые действия</h3>
-            
-            {randomMessage && (
-                <div className={`random-message ${randomMessage.includes('⚠️') ? 'error' : 'success'}`}>
-                    {randomMessage}
-                </div>
-            )}
 
             <div className="action-buttons">
                 <button onClick={resetAll} className="action-btn reset">

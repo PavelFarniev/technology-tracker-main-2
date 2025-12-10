@@ -3,6 +3,7 @@ import TechnologyList from '../components/TechnologyList.jsx';
 import TechnologySearch from '../components/TechnologySearch.jsx';
 import useTechnologiesApi from '../hooks/useTechnologiesApi.js';
 import { useTechnologies as useLocalTechnologies } from '../hooks/useTechnologies.js';
+import { useNotifier } from '../context/NotificationContext.jsx';
 import './RoadmapImport.css';
 
 function RoadmapImport() {
@@ -17,6 +18,7 @@ function RoadmapImport() {
         resourceError
     } = useTechnologiesApi();
     const { setTechnologies: setLocalTechnologies } = useLocalTechnologies();
+    const { notify } = useNotifier();
 
     const syncWithTracker = (newTech) => {
         setLocalTechnologies((prev) => {
@@ -44,9 +46,29 @@ function RoadmapImport() {
     };
 
     const handleBulkImport = async (techs) => {
-        for (const tech of techs) {
-            await handleAddTechnology(tech);
+        if (!techs || techs.length === 0) {
+            notify({
+                message: 'Нет технологий для импорта',
+                severity: 'warning'
+            });
+            return;
         }
+
+        let importedCount = 0;
+        for (const tech of techs) {
+            try {
+                await handleAddTechnology(tech);
+                importedCount++;
+            } catch (error) {
+                console.error('Ошибка импорта технологии:', error);
+            }
+        }
+
+        notify({
+            message: `Импортировано ${importedCount} из ${techs.length} технологий`,
+            severity: importedCount === techs.length ? 'success' : 'warning',
+            autoHideDuration: 4000
+        });
     };
 
     return (
